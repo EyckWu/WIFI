@@ -1,0 +1,31 @@
+ext{
+    compileSdkVer = 25
+    //构建工具版本
+    buildToolsVer = "26.0.3"
+    //最低兼容版本
+    minSdkVer = 24
+    //测试过的版本
+    targetSdkVer = 25
+    //JDK版本
+    sourceCompatVer = JavaVersion.VERSION_1_8
+    targetCompatVer = JavaVersion.VERSION_1_8
+
+    versions = [
+            supportVersion        : "25.4.0",
+            junit                 : "4.12",
+            gson                  : "2.6.1",
+            rxPermission          : "0.10.2",
+    ]
+
+    libraries = [
+            support_core_ui       : "com.android.support:support-core-ui:${versions.supportVersion}",
+            supportAnnotations    : "com.android.support:support-annotations:${versions.supportVersion}",
+            supportAppCompat      : "com.android.support:appcompat-v7:${versions.supportVersion}",
+            supportRecyclerView   : "com.android.support:recyclerview-v7:${versions.supportVersion}",
+            supportDesign         : "com.android.support:design:${versions.supportVersion}",
+            supportCardView       : "com.android.support:cardview-v7:${versions.supportVersion}",
+            junit                 : "junit:junit:${versions.junit}",
+
+            gson                  : "com.google.code.gson:gson:${versions.gson}",
+    ]
+}
