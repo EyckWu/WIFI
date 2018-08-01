@@ -1,7 +1,6 @@
 package com.eyckwu.wifi.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -81,7 +80,7 @@ public class SwitchBar extends LinearLayout implements View.OnClickListener, Com
         updateText();
     }
 
-    public void setCheck(boolean checked){
+    public void setChecked(boolean checked){
         setTextViewLabel(checked);
         switch_widget.setChecked(checked);
     }
@@ -134,7 +133,7 @@ public class SwitchBar extends LinearLayout implements View.OnClickListener, Com
     @Override
     public void onClick(View v) {
         boolean check = !switch_widget.isChecked();
-        setCheck(check);
+        setChecked(check);
     }
 
     @Override
