@@ -38,7 +38,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(WifiManager.WIFI_STATE_CHANGED_ACTION.equals(action)) {
-                handleWifiStateChange(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN));
+                handleWifiStateChanged(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN));
             }else if(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {//并没有实现
                 if(!mConnected.get()) {
                     handleStateChanged(WifiInfo.getDetailedStateOf((SupplicantState) intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
@@ -94,9 +94,9 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener {
 
     }
 
-    private void setUpSwitchBar() {
+    public void setUpSwitchBar() {
         int state = mWifiManager.getWifiState();
-        handleWifiStateChange(state);
+        handleWifiStateChanged(state);
         if(!mListeningToOnSwitchChange) {
             mSwitchBar.addOnSwitchChangeListener(this);
             mListeningToOnSwitchChange = true;
@@ -129,7 +129,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener {
         }
     }
 
-    private void handleWifiStateChange(int state) {
+    private void handleWifiStateChanged(int state) {
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING ://正在开启
                 mSwitchBar.setEnable(false);
