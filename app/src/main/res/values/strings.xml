@@ -4,4 +4,5 @@
     <string name="switch_on_text">On</string>
     <string name="switch_off_text">Off</string>
     <string name="wifi_error">Error</string>
+    <string name="wifi_fail_to_scan">fail to scan</string>
 </resources>
