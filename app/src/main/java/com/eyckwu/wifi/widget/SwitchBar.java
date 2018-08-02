@@ -3,6 +3,7 @@ package com.eyckwu.wifi.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
  */
 
 public class SwitchBar extends LinearLayout implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    private static final String TAG = SwitchBar.class.getSimpleName();
     public interface OnSwitchChangeListener{
         void onSwitchChanged(Switch switchView, boolean isChecked);
     }
@@ -37,30 +39,30 @@ public class SwitchBar extends LinearLayout implements View.OnClickListener, Com
             new ArrayList<OnSwitchChangeListener>();
 
     public SwitchBar(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public SwitchBar(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, -1);
     }
 
     public SwitchBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        this(context, attrs, defStyleAttr, -1);
     }
 
     public SwitchBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
-        LayoutInflater.from(context).inflate(R.layout.switch_bar, this);
-        switch_text = (TextView)findViewById(R.id.switch_text);
+        View view = LayoutInflater.from(context).inflate(R.layout.switch_bar, this);
+        switch_text = (TextView)view.findViewById(R.id.switch_text);
         mLabel = getResources().getString(R.string.switch_off_text);
         updateText();
 
-        restricted_icon = (ImageView)findViewById(R.id.restricted_icon);
+        restricted_icon = (ImageView)view.findViewById(R.id.restricted_icon);
         setOnClickListener(this);
         setVisibility(GONE);
 
-        switch_widget = (Switch)findViewById(R.id.switch_widget);
+        switch_widget = (Switch)view.findViewById(R.id.switch_widget);
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
             @Override
             public void onSwitchChanged(Switch switchView, boolean isChecked) {
@@ -82,6 +84,9 @@ public class SwitchBar extends LinearLayout implements View.OnClickListener, Com
 
     public void setChecked(boolean checked){
         setTextViewLabel(checked);
+        if(switch_widget ==null) {
+            Log.w(TAG, "switch_widget ==null");
+        }
         switch_widget.setChecked(checked);
     }
 
@@ -127,7 +132,13 @@ public class SwitchBar extends LinearLayout implements View.OnClickListener, Com
     }
 
     private void updateText() {
-        switch_text.setText(mLabel);
+        if(switch_text == null) {
+            Log.w(TAG, "switch_text == null");
+        }else {
+            Log.w(TAG, "mLabel == null");
+            switch_text.setText(mLabel == null ? "WLAN" : mLabel );
+        }
+
     }
 
     @Override

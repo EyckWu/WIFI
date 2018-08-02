@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements WifiTracker.WifiL
     public void onScanCompleted() {
         scanResults = mWifiManager.getScanResults();
         for (ScanResult s: scanResults){
-            Log.d(TAG, s.toString());
+            Log.w(TAG, s.toString());
         }
         wifiConfigurations = mWifiManager.getConfiguredNetworks();
         if(scanResults == null) {

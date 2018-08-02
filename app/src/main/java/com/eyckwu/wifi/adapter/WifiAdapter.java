@@ -79,6 +79,7 @@ public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.ViewHolder> {
             ll_wifi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    checkWifiCacheState(scanResults.get(getAdapterPosition()));
                     boolean free = isFree(scanResults.get(getAdapterPosition()).capabilities);
                     mSsid = scanResults.get(getAdapterPosition()).SSID;
                     if(!free) {
@@ -124,6 +125,12 @@ public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.ViewHolder> {
                 }
             });
         }
+    }
+
+    private void checkWifiCacheState(ScanResult scanResult) {
+        String ssid = scanResult.SSID;
+        String capabilities = scanResult.capabilities;
+
     }
 
     private boolean isFree(String capabilities) {
