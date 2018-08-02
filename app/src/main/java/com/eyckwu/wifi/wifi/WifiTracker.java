@@ -364,6 +364,7 @@ public class WifiTracker {
                         mStaleScanResults = false;
                     }
                     updateAccessPoints();
+                    mMainHandler.sendEmptyMessage(mMainHandler.MSG_COMPLETED_SCANNING);
                     break;
 
                 case MSG_UPDATE_NETWORK_INFO :
@@ -443,6 +444,7 @@ public class WifiTracker {
         @VisibleForTesting static final int MSG_ACCESS_POINT_CHANGED = 2;
         private static final int MSG_RESUME_SCANNING = 3;
         private static final int MSG_PAUSE_SCANNING = 4;
+        private static final int MSG_COMPLETED_SCANNING = 5;
         public MainHandler(Looper looper){
             super(looper);
         }
@@ -459,6 +461,10 @@ public class WifiTracker {
 
                 case MSG_WIFI_STATE_CHANGED :
                     mWifiListener.onWifiStateChanged(msg.arg1);
+                    break;
+
+                case MSG_COMPLETED_SCANNING :
+                    mWifiListener.onScanCompleted();
                     break;
 
                 case MSG_ACCESS_POINT_CHANGED :
@@ -493,6 +499,7 @@ public class WifiTracker {
             removeMessages(MSG_WIFI_STATE_CHANGED);
             removeMessages(MSG_PAUSE_SCANNING);
             removeMessages(MSG_RESUME_SCANNING);
+            removeMessages(MSG_COMPLETED_SCANNING);
         }
     }
 
@@ -527,5 +534,7 @@ public class WifiTracker {
          * getAccessPoints should be called to get the latest information.
          */
         void onAccessPointsChanged();
+
+        void onScanCompleted();
     }
 }

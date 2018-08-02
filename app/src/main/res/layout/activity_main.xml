@@ -16,6 +16,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -31,6 +32,14 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+
+            <com.eyckwu.wifi.widget.SwitchBar
+                android:id="@+id/switchbar_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.eyckwu.wifi.widget.SwitchBar>
+
             <TextView
                 android:text="可用WLAN列表"
                 android:layout_width="match_parent"
